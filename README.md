@@ -2,9 +2,6 @@
 >
 ## 介绍
 >  公司准备要搭建数据展示平台，通过后台对于城市宝app日志的统计，运用数据展示形式更直观的展现app的一些运营情况和使用情况。所以就提前用vue+element-ui+mockjs搞了一个雏形
-
-### 说明
-
 　　
 
 ### 相关技术：
@@ -22,9 +19,11 @@
 
 ## Build Setup
 
-# Clone the project locally
-> git clone
+
 ``` bash
+# Clone the project locally
+> git clone https://github.com/galary/ENJOYOR.git
+
 # install dependencies
 npm install
 
