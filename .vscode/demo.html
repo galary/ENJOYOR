@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="show">show</button>
+
+    <script type="text/javascript">
+        /**
+         * 模态框，可以接受ok,cancel按钮的事件处理
+         * 背景为黑色，半透明，中间居中，为渲染完计算
+         * 参数是obj
+         * 可选参数 {title:string,content:string,onok:function,concancel:function}
+         */
+        function MyAlert(obj) {
+            this._template = document.createElement('div');
+            this._modal = document.createElement('div');
+            this._container = document.createElement('div');
+            this._title = document.createElement('div');
+            this._content = document.createElement('div');
+            this._btn_ok = document.createElement('button');
+            this._btn_cancel = document.createElement('button');
+            console.log(typeof this._render != "function");
+            if (typeof this._render != "function") {
+                MyAlert.prototype._render = function(obj) {
+                    this._template.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;display:none;z-index:999";
+                    this._modal.style.cssText = "position:absolute;top:0;left:0;background:black;opacity:0.5;width:100%;height:100%;z-index:999";
+                    this._container.style.cssText = "background:white;width:400px;opacity:1;z-index:1000;position: absolute;top:50%;left:50%;margin-left:-200px;"
+                    this._title.style.cssText = "background:blue;height:1.5em"
+                    this._btn_ok.style.cssText = "background:blue;color:white;width:4em;height:1.5em;";
+                    this._btn_cancel.style.cssText = "background:red;color:white;width:4em;height:1.5em;";
+                    this._title.innerHTML = (obj && obj.title ? obj.title : 'title');
+                    this._content.innerHTML = (obj && obj.content ? obj.content : 'content');
+                    this._btn_ok.textContent = "ok";
+                    this._btn_cancel.textContent = "cancel";
+
+                    var that = this;
+                    this._template.onclick = function(e) {
+                        if (e.target.nodeName == "BUTTON" || e.target == that._modal) that.hide(); //点击空白处同样隐藏
+                        if (e.target == that._btn_ok) {
+                            if (obj && obj.onok) {
+                                obj.onok()
+                            }
+                        };
+                        if (e.target == that._btn_cancel) {
+                            if (obj && obj.oncancel) {
+                                obj.oncancel()
+                            }
+                        };
+                    }
+                    setTimeout(function() {
+                        that._container.style['margin-top'] = "-" + that._container.offsetHeight / 2 + "px";
+                    }, 0);
+                    this._container.appendChild(this._title);
+                    this._container.appendChild(this._content);
+                    this._container.appendChild(this._btn_ok);
+                    this._container.appendChild(this._btn_cancel);
+                    this._template.appendChild(this._container);
+                    this._template.appendChild(this._modal);
+                    document.body.appendChild(this._template);
+                    that._template.style.display = 'block';
+                };
+            }
+
+            if (typeof this.show != "function") {
+                MyAlert.prototype.show = function(newobj) {
+                    this._render(newobj || obj);
+                }
+            }
+            if (typeof this.hide != "function") {
+                MyAlert.prototype.hide = function() {
+                    this._template.style.display = 'none';
+                }
+            }
+
+            if (typeof this.destory != "function") {
+                MyAlert.prototype.destory = function() {
+                    document.body.removeChild(this._template);
+                    delete this._template;
+                    MyAlert.prototype = null;
+                }
+            }
+        }
+
+        var aa = new MyAlert({
+            title: "警告",
+            content: '<input type="text"/>',
+            onok: function() {
+                console.log(this.content.value)
+            }
+        });
+        show.onclick = function() {
+            aa.show();
+        }
+    </script>
+
+</body>
+
+</html>
