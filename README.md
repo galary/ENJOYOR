@@ -16,6 +16,7 @@
 
 * mock.js: 生成随机数据，拦截 Ajax 请求,让前端攻城师独立于后端进行开发。
 
+* iView: iView 是一套基于 Vue.js 的开源 UI 组件库，主要服务于 PC 界面的中后台产品。(学习iView时在工具栏目开发时运用了iView)
 
 ## Build Setup
 
