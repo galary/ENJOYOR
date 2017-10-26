@@ -11,7 +11,9 @@ import EchartsPie from '@/components/echarts/pie'
 import UserList from '@/components/user/list'
 import UserChangePwd from '@/components/user/changepwd'
 import UserProfile from '@/components/user/profile'
-
+import ImageEdit from '@/components/editTool/imgEdit'
+import TextEdit from '@/components/editTool/text-edit'
+import Draggable from '@/components/editTool/draggable'
 // 懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/components/Login'], resolve)
 
@@ -19,8 +21,7 @@ Vue.use(Router)
 
 let router = new Router({
   // mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/login',
       name: '登录',
       component: Login
@@ -56,7 +57,7 @@ let router = new Router({
       iconCls: 'iconfont icon-books',
       children: [
         { path: '/book/list', component: BookList, name: '图书列表', menuShow: true },
-        { path: '/book/category', component: BookCategoryList, name: '图书分类', menuShow: true }
+
       ]
     },
     {
@@ -68,9 +69,11 @@ let router = new Router({
       children: [
         { path: '/echarts/map', component: EchartsMap, name: '地图', menuShow: true },
         { path: '/echarts/pie', component: EchartsPie, name: '饼图', menuShow: true },
+        { path: '/book/category', component: BookCategoryList, name: 'demo', menuShow: true }
         // { path: '/echarts/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
       ]
     },
+
     {
       path: '/',
       component: Home,
@@ -81,8 +84,20 @@ let router = new Router({
         { path: '/user/profile', component: UserProfile, name: '设置', menuShow: true },
         { path: '/user/changepwd', component: UserChangePwd, name: '修改密码', menuShow: true }
       ]
-    },  
-     {
+    },
+    {
+      path: '/',
+      component: Home,
+      name: '编辑工具',
+      menuShow: true,
+      iconCls: 'iconfont icon-gongju',
+      children: [
+        { path: '/editTool/imgEdit', component: ImageEdit, name: '图片编辑', menuShow: true },
+        { path: '/editTool/text-edit', component: TextEdit, name: '文本编辑', menuShow: true },
+        { path: '/editTool/draggable', component: Draggable, name: '拖拽组件', menuShow: true }
+      ]
+    },
+    {
       path: '/',
       component: Home,
       name: '监控异常图',
@@ -90,10 +105,10 @@ let router = new Router({
       leaf: true, // 只有一个节点
       iconCls: 'iconfont icon-users', // 图标样式class
       children: [
-        { path: '/echarts/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
+        { path: '/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
       ]
     }
-    
+
   ]
 })
 

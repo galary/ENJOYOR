@@ -28,18 +28,15 @@
         </el-dropdown>
       </div>
     </el-col>
-  
     <!--中间-->
     <el-col :span="24" class="main">
       <!--左侧导航-->
       <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
-  
         <!--展开折叠开关-->
         <div class="menu-toggle" @click.prevent="collapse">
           <i class="iconfont icon-menufold" v-show="!collapsed"></i>
           <i class="iconfont icon-menuunfold" v-show="collapsed"></i>
         </div>
-  
         <!--菜单展开时的显示情况-->
         <el-menu v-show="!collapsed" default-active="0" @open="handleOpen" @close="handleClose" router>
           <template v-for="(item,index) in $router.options.routes" v-if="item.menuShow">
@@ -55,7 +52,6 @@
             </el-menu-item>
           </template>
         </el-menu>
-  
         <!--菜单折叠后的显示情况-->
         <ul v-show="collapsed" class="el-menu collapsed" ref="menuCollapsed">
           <template v-for="(item,index) in $router.options.routes" v-if="item.menuShow">
@@ -72,9 +68,7 @@
             </li>
           </template>
         </ul>
-  
       </aside>
-  
       <!--右侧内容区-->
       <section class="content-container">
         <div class="grid-content bg-purple-light">
@@ -86,10 +80,8 @@
         </div>
       </section>
     </el-col>
-  
   </el-row>
 </template>
-
 <script>
 import { bus } from '../bus.js'
 export default {
@@ -114,7 +106,7 @@ export default {
       //console.log('handleclose');
     },
     //折叠导航栏
-    collapse: function () {
+    collapse: function() {
       this.collapsed = !this.collapsed;
       console.log(this.collapsed);
     },
@@ -142,7 +134,6 @@ export default {
     }
   }
 }
-
 
 </script>
 <style>
@@ -184,6 +175,7 @@ export default {
 .warp-main {
   padding-top: 20px;
 }
+
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
@@ -242,6 +234,7 @@ export default {
       height: 100%;
       border-radius: 0px;
       background-color: #333744;
+      overflow: auto;
     }
     .collapsed {
       width: 50px;
@@ -282,4 +275,8 @@ export default {
     }
   }
 }
+.el-submenu .el-menu-item {
+  min-width: 0 !important;
+}
+
 </style>
