@@ -51,7 +51,7 @@
           <Card dis-hover>
             <p slot="title">
               <Icon type="ios-list-outline"></Icon>
-              本周欲完成任务清单(拖拽到右侧删除)
+              已实现人生清单(拖拽到右侧删除)
             </p>
             <div style="height: 360px;">
               <ul id="doList" class="iview-admin-draggable-list"></ul>
@@ -62,7 +62,7 @@
           <Card dis-hover>
             <p slot="title">
               <Icon type="ios-list"></Icon>
-              所剩任务清单(拖拽到左侧添加)
+              人生清单(拖拽到左侧添加)
             </p>
             <div style="height: 360px;">
               <ul id="todoList" class="iview-admin-draggable-list">
@@ -80,7 +80,7 @@
       <Card>
         <p slot="title">
           <Icon type="ios-paper-outline"></Icon>
-          本周已选任务清单
+          已实现人生清单
         </p>
         <div style="height: 394px;">
           <ul class="iview-admin-draggable-list">
@@ -128,7 +128,7 @@
           买得起的清单
         </p>
         <div style="height: 394px;">
-          <ul class="iview-admin-draggable-list">
+          <ul class="iview-admin-draggable-list" id="demo">
             <li v-for="(item, index) in affordList" :key="index" class="notwrap" :data-index="index">
               {{ item.name }}
             </li>
@@ -146,28 +146,28 @@ export default {
   data() {
     return {
       todoArray: [{
-          content: '完成iview-admin基本开发'
+          content: '读万卷书'
         },
         {
-          content: '对iview-admin进行性能优化'
+          content: '行万里路'
         },
         {
-          content: '对iview-admin的细节进行优化'
+          content: '结益友'
         },
         {
-          content: '完成iview-admin开发'
+          content: '拜良师'
         },
         {
-          content: '解决发现的bug'
+          content: '赏美景美人'
         },
         {
-          content: '添加更多组件'
+          content: '饮美酒咖啡'
         },
         {
-          content: '封装更多图表'
+          content: '访各国'
         },
         {
-          content: '增加更多人性化功能'
+          content: '种田、砍柴、喂马'
         }
       ],
       doArray: [],
@@ -250,6 +250,22 @@ export default {
       animation: 120,
       fallbackClass: 'iview-admin-cloned-item',
       onRemove(event) {
+        console.log(event.oldIndex)
+        vm.affordList.splice(event.oldIndex, 1);
+      }
+    });
+    let demo = document.getElementById('demo');
+    Sortable.create(demo, {
+      group: {
+        name: 'list',
+        pull: true
+      },
+      sort: false,
+      filter: '.iview-admin-draggable-delete',
+      animation: 120,
+      fallbackClass: 'iview-admin-cloned-item',
+      onRemove(event) {
+        console.log(event.oldIndex)
         vm.affordList.splice(event.oldIndex, 1);
       }
     });

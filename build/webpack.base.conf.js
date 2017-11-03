@@ -27,6 +27,14 @@ module.exports = {
     }
   },
   module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel',
+      query: {
+        presets: ['es2015']
+      }
+    }],
     rules: [{
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -71,5 +79,13 @@ module.exports = {
         }
       }
     ]
-  }
+
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.ProvidePlugin({
+      jQuery: "jquery",
+      $: "jquery"
+    })
+  ]
 }

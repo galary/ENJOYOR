@@ -14,6 +14,8 @@ import UserProfile from '@/components/user/profile'
 import ImageEdit from '@/components/editTool/imgEdit'
 import TextEdit from '@/components/editTool/text-edit'
 import Draggable from '@/components/editTool/draggable'
+import Favorite from '@/components/plug-in/myfavorite'
+import Video from '@/components/videopulg'
 // 懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/components/Login'], resolve)
 
@@ -25,6 +27,11 @@ let router = new Router({
       path: '/login',
       name: '登录',
       component: Login
+    },
+    {
+      path: '/video',
+      name: '监控视频',
+      component: Video
     },
     {
       path: '/',
@@ -69,8 +76,19 @@ let router = new Router({
       children: [
         { path: '/echarts/map', component: EchartsMap, name: '地图', menuShow: true },
         { path: '/echarts/pie', component: EchartsPie, name: '饼图', menuShow: true },
-        { path: '/book/category', component: BookCategoryList, name: 'demo', menuShow: true }
+        { path: '/book/category', component: BookCategoryList, name: 'demo', menuShow: true },
+        { path: '/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
         // { path: '/echarts/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
+      ]
+    },
+    {
+      path: '/',
+      component: Home,
+      name: '插件库',
+      menuShow: true,
+      iconCls: 'iconfont icon-zhuzhuangtu',
+      children: [
+        { path: '/plug-in/myfavorite', component: Favorite, name: 'Favorite', menuShow: true },
       ]
     },
 
@@ -81,7 +99,7 @@ let router = new Router({
       menuShow: true,
       iconCls: 'iconfont icon-setting1',
       children: [
-        { path: '/user/profile', component: UserProfile, name: '设置', menuShow: true },
+        { path: '/user/profile', component: UserProfile, name: '个人设置', menuShow: true },
         { path: '/user/changepwd', component: UserChangePwd, name: '修改密码', menuShow: true }
       ]
     },
@@ -96,18 +114,18 @@ let router = new Router({
         { path: '/editTool/text-edit', component: TextEdit, name: '文本编辑', menuShow: true },
         { path: '/editTool/draggable', component: Draggable, name: '拖拽组件', menuShow: true }
       ]
-    },
-    {
-      path: '/',
-      component: Home,
-      name: '监控异常图',
-      menuShow: true,
-      leaf: true, // 只有一个节点
-      iconCls: 'iconfont icon-users', // 图标样式class
-      children: [
-        { path: '/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
-      ]
     }
+    // {
+    //   path: '/',
+    //   component: Home,
+    //   name: '监控异常图',
+    //   menuShow: true,
+    //   leaf: true, // 只有一个节点
+    //   iconCls: 'iconfont icon-users', // 图标样式class
+    //   children: [
+    //     
+    //   ]
+    // }
 
   ]
 })

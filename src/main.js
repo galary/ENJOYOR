@@ -10,6 +10,7 @@ import '@/assets/font/iconfont1.css'
 import 'iview/dist/styles/iview.css';
 import router from './router'
 import Mock from './mock'
+import $ from 'jquery'
 Vue.use(iView);
 Mock.init()
 

@@ -108,7 +108,6 @@ export default {
     //折叠导航栏
     collapse: function() {
       this.collapsed = !this.collapsed;
-      console.log(this.collapsed);
     },
     showMenu(i, status) {
       this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
@@ -130,7 +129,6 @@ export default {
     if (user) {
       user = JSON.parse(user);
       this.sysUserName = user.name || '';
-      console.log(this.sysUserName)
     }
   }
 }
