@@ -22,18 +22,16 @@ const Login = resolve => require(['@/components/Login'], resolve)
 Vue.use(Router)
 
 let router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [{
       path: '/login',
       name: '登录',
       component: Login
-    },
-    {
+    }, {
       path: '/video',
       name: '监控视频',
       component: Video
-    },
-    {
+    }, {
       path: '/',
       name: 'home',
       component: Home,
@@ -41,55 +39,80 @@ let router = new Router({
       leaf: true, // 只有一个节点
       menuShow: true,
       iconCls: 'iconfont icon-home', // 图标样式class
-      children: [
-        { path: '/dashboard', component: Dashboard, name: '首页', menuShow: true }
-      ]
-    },
-    {
+      children: [{
+        path: '/dashboard',
+        component: Dashboard,
+        name: '首页',
+        menuShow: true
+      }]
+    }, {
       path: '/',
       component: Home,
       name: '用户管理',
       menuShow: true,
       leaf: true, // 只有一个节点
       iconCls: 'iconfont icon-users', // 图标样式class
-      children: [
-        { path: '/user/list', component: UserList, name: '用户列表', menuShow: true }
-      ]
-    },
-    {
+      children: [{
+        path: '/user/list',
+        component: UserList,
+        name: '用户列表',
+        menuShow: true
+      }]
+    }, {
       path: '/',
       component: Home,
       name: '图书管理',
       menuShow: true,
       iconCls: 'iconfont icon-books',
-      children: [
-        { path: '/book/list', component: BookList, name: '图书列表', menuShow: true },
+      children: [{
+          path: '/book/list',
+          component: BookList,
+          name: '图书列表',
+          menuShow: true
+        },
 
       ]
-    },
-    {
+    }, {
       path: '/',
       component: Home,
       name: 'echarts',
       menuShow: true,
       iconCls: 'iconfont icon-zhuzhuangtu',
-      children: [
-        { path: '/echarts/map', component: EchartsMap, name: '地图', menuShow: true },
-        { path: '/echarts/pie', component: EchartsPie, name: '饼图', menuShow: true },
-        { path: '/book/category', component: BookCategoryList, name: 'demo', menuShow: true },
-        { path: '/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
+      children: [{
+          path: '/echarts/map',
+          component: EchartsMap,
+          name: '地图',
+          menuShow: true
+        }, {
+          path: '/echarts/pie',
+          component: EchartsPie,
+          name: '饼图',
+          menuShow: true
+        }, {
+          path: '/book/category',
+          component: BookCategoryList,
+          name: 'demo',
+          menuShow: true
+        }, {
+          path: '/monitor',
+          component: EchartsMonitor,
+          name: '监控异常图',
+          menuShow: true
+        }
         // { path: '/echarts/monitor', component: EchartsMonitor, name: '监控异常图', menuShow: true }
       ]
-    },
-    {
+    }, {
       path: '/',
       component: Home,
       name: '插件库',
       menuShow: true,
       iconCls: 'iconfont icon-zhuzhuangtu',
-      children: [
-        { path: '/plug-in/myfavorite', component: Favorite, name: 'Favorite', menuShow: true },
-      ]
+      children: [{
+        path: '/plug-in/myfavorite',
+        component: Favorite,
+        name: 'Favorite',
+        menuShow: true
+      }, ]
     },
 
     {
@@ -98,22 +121,39 @@ let router = new Router({
       name: '设置',
       menuShow: true,
       iconCls: 'iconfont icon-setting1',
-      children: [
-        { path: '/user/profile', component: UserProfile, name: '个人设置', menuShow: true },
-        { path: '/user/changepwd', component: UserChangePwd, name: '修改密码', menuShow: true }
-      ]
-    },
-    {
+      children: [{
+        path: '/user/profile',
+        component: UserProfile,
+        name: '个人设置',
+        menuShow: true
+      }, {
+        path: '/user/changepwd',
+        component: UserChangePwd,
+        name: '修改密码',
+        menuShow: true
+      }]
+    }, {
       path: '/',
       component: Home,
       name: '编辑工具',
       menuShow: true,
       iconCls: 'iconfont icon-gongju',
-      children: [
-        { path: '/editTool/imgEdit', component: ImageEdit, name: '图片编辑', menuShow: true },
-        { path: '/editTool/text-edit', component: TextEdit, name: '文本编辑', menuShow: true },
-        { path: '/editTool/draggable', component: Draggable, name: '拖拽组件', menuShow: true }
-      ]
+      children: [{
+        path: '/editTool/imgEdit',
+        component: ImageEdit,
+        name: '图片编辑',
+        menuShow: true
+      }, {
+        path: '/editTool/text-edit',
+        component: TextEdit,
+        name: '文本编辑',
+        menuShow: true
+      }, {
+        path: '/editTool/draggable',
+        component: Draggable,
+        name: '拖拽组件',
+        menuShow: true
+      }]
     }
     // {
     //   path: '/',
@@ -138,7 +178,9 @@ router.beforeEach((to, from, next) => {
   } else {
     let user = JSON.parse(window.sessionStorage.getItem('access-user'))
     if (!user) {
-      next({ path: '/login' })
+      next({
+        path: '/login'
+      })
     } else {
       next()
     }

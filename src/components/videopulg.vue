@@ -69,7 +69,7 @@ export default {
   height: 100% !important;
 }
 .container * {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 </style>
